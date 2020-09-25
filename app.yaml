@@ -1,0 +1,21 @@
+apiVersion: apps/v1             # Versión de kubernetes
+kind: Deployment                # Tipo de Objeto 
+metadata:                       # Información adicional
+  name: node-deployment         # Nombre del despliegue
+  labels:                       # Etiquetas con clave valor, sirven para identificar       
+    app: node-app               # Etiqueta para el despliegue
+spec:                           # Especificaciones del despliegue
+  replicas: 1                   # Número de replicas que tendrá este pod
+  selector:                     # Es la forma primitiva de hacer referencia, es como un id interno
+    matchLabels:                # 
+      app: node-app             # Etiqueta para que otros objetos de kubernetes lo encuentren
+  template:                     # Es la configuración final del pod 
+    metadata:                   # Tiene su propia metadata para la plantilla o pod
+      labels:                   # 
+        app: node-app           # Etiqueta del contenedor
+    spec:                       # Tiene sus especificaciones
+      containers:               # Información del contenedors o mas si el pod tiene muchos
+      - name: node-app          # Nombre del contenedor
+        image: gcr.io/mi-propject1/node-mi-app      # url de imagen, docker hub defautl
+        ports:                  # puertos
+        - containerPort: 8080   # puerto 80
